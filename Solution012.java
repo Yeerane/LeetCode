@@ -15,9 +15,4 @@ public class Solution012 {
 		}
 		return roman;
 	}
-
-	public static void main(String[] args) {
-		Solution012 test = new Solution012();
-		System.out.println(test.intToRoman(20));
-	}
 }
