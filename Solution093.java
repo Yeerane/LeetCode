@@ -5,29 +5,39 @@ public class Solution093 {
 		return (num >= 0 && num <= 255);
 	}
 
+	public boolean beginWithZero(String s) {
+		if(s == null || s == "") {
+			return false;
+		} else if(s.charAt(0) == '0') {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public void searchIpAdd(String curTry, List<String> ipList, String s, int beginIndex, int round) {
 		// System.out.println("this is round " + round);
 		if(round == 4) {
 			if(beginIndex < s.length()) {
-				if(isValid(Integer.parseInt(s.substring(beginIndex))) && Integer.parseInt(s.substring(beginIndex)) != 0 || Integer.parseInt(s.substring(beginIndex)) == 0 && beginIndex == s.length() - 1) {
-					// if(Integer.parseInt(s.substring(beginIndex)) == 0 && beginIndex < s.length() - 1) {
-					// 	break;
-					// }
-					curTry += s.substring(beginIndex);
-					System.out.println("Valid IP: " + curTry);
-					ipList.add(curTry);
-					System.out.println(ipList.size());
+				String part = s.substring(beginIndex);
+				if(part.length() <= 3 && isValid(Integer.parseInt(part))) {
+					if(!beginWithZero(part) || (beginWithZero(part) && part.equals("0"))) {
+						curTry += part;
+						System.out.println("Valid IP: " + curTry);
+						ipList.add(curTry);
+						System.out.println(ipList.size());
+					}
 				}
 			} 
 		} else {
 			for(int i = beginIndex + 1; i < beginIndex + 4 && i < s.length(); i++) {
-				if(isValid(Integer.parseInt(s.substring(beginIndex, i)))) {
-					// System.out.println("this is round " + round);
-					curTry += s.substring(beginIndex, i) + ".";
-					searchIpAdd(curTry, ipList, s, i, round + 1);
-					curTry = curTry.substring(0, beginIndex + round - 1);
-					if(Integer.parseInt(s.substring(beginIndex, )) == 0) {
-						continue;
+				String part = s.substring(beginIndex, i);
+				if(isValid(Integer.parseInt(part))) {
+					// System.out.println("this is round " + round + ", try " + part);
+					if(!beginWithZero(part) || (beginWithZero(part) && part.equals("0"))) {
+						curTry += s.substring(beginIndex, i) + ".";
+						searchIpAdd(curTry, ipList, s, i, round + 1);
+						curTry = curTry.substring(0, beginIndex + round - 1);
 					}
 				}
 			}
@@ -44,7 +54,7 @@ public class Solution093 {
     public static void main(String[] args) {
     	Solution093 test = new Solution093();
     	List<String> list = new ArrayList<String>();
-    	list = test.restoreIpAddresses("255000255");
+    	list = test.restoreIpAddresses("0000");
     	System.out.println(list.size());
     	for(int i = 0; i < list.size(); i ++) {
     		System.out.println(list.get(i));
