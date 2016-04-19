@@ -1,4 +1,4 @@
-public class Solution003 {
+class Solution003 {
     public static final int NUM_OF_CHARS = 10000;
     public int lengthOfLongestSubstring(String s) {
         if(s == null || s.length() == 0){

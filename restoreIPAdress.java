@@ -1,6 +1,5 @@
 import java.util.*;
-
-public class Solution093 {
+class Solution093 {
 	public boolean isValid(int num) {
 		return (num >= 0 && num <= 255);
 	}
@@ -16,16 +15,13 @@ public class Solution093 {
 	}
 
 	public void searchIpAdd(String curTry, List<String> ipList, String s, int beginIndex, int round) {
-		// System.out.println("this is round " + round);
 		if(round == 4) {
 			if(beginIndex < s.length()) {
 				String part = s.substring(beginIndex);
 				if(part.length() <= 3 && isValid(Integer.parseInt(part))) {
 					if(!beginWithZero(part) || (beginWithZero(part) && part.equals("0"))) {
 						curTry += part;
-						System.out.println("Valid IP: " + curTry);
 						ipList.add(curTry);
-						System.out.println(ipList.size());
 					}
 				}
 			} 
@@ -33,7 +29,6 @@ public class Solution093 {
 			for(int i = beginIndex + 1; i < beginIndex + 4 && i < s.length(); i++) {
 				String part = s.substring(beginIndex, i);
 				if(isValid(Integer.parseInt(part))) {
-					// System.out.println("this is round " + round + ", try " + part);
 					if(!beginWithZero(part) || (beginWithZero(part) && part.equals("0"))) {
 						curTry += s.substring(beginIndex, i) + ".";
 						searchIpAdd(curTry, ipList, s, i, round + 1);
@@ -53,11 +48,8 @@ public class Solution093 {
 
     public static void main(String[] args) {
     	Solution093 test = new Solution093();
-    	List<String> list = new ArrayList<String>();
-    	list = test.restoreIpAddresses("0000");
-    	System.out.println(list.size());
-    	for(int i = 0; i < list.size(); i ++) {
-    		System.out.println(list.get(i));
-    	}
+    	System.out.println(test.restoreIpAddresses("0000"));
+    	System.out.println(test.restoreIpAddresses("25525511135"));
+    	System.out.println(test.restoreIpAddresses("10775077"));
     }
 }

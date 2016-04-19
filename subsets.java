@@ -3,19 +3,6 @@
 
 import java.util.*;
 
-class IntComprator implements Comparator {
-	public int compare(Object num1, Object num2) {
-		int val1 = ((Integer)num1).intValue();
-		int val2 = ((Integer)num2).intValue();
-		if(val1 > val2) {
-			return -1;
-		} else if(val1 == val2) {
-			return 0;
-		} else {
-			return 1;
-		}
-	}
-}
 class Solution078 {
 	public void tryAdd(ArrayList<List<Integer>> result, List<Integer> list, int[] nums, int pos) {
 		result.add(new ArrayList<Integer>(list));
@@ -38,7 +25,7 @@ class Solution078 {
 
     public static void main(String[] args) {
     	Solution078 test = new Solution078();
-    	int[] nums1 = {1, 2, 3, 4, 5, 6, 7, 8};
+    	int[] nums1 = {6, 4, 5, 6, 7, 8};
     	System.out.println(test.subsets(nums1));
     }
 }
