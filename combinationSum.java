@@ -15,19 +15,19 @@
 
 import java.util.*;
 class Solution039 {
-	public void combinationSumHelper(int[] candidates, int startIndex, int target, List<Integer> result, List<List<Integer>> resultSet) {
-		if(target == 0) {
-			resultSet.add(new ArrayList<Integer>(result));
-		} else {
-			for(int i = startIndex; i < candidates.length && target >= candidates[i]; i ++) {
-				target -= candidates[i];
-				result.add(candidates[i]);
-				combinationSumHelper(candidates, i, target, result, resultSet);
-				result.remove(result.size() - 1);
-				target += candidates[i];
-			}
-		}
-	}
+    public void combinationSumHelper(int[] candidates, int startIndex, int target, List<Integer> result, List<List<Integer>> resultSet) {
+        if(target == 0) {
+            resultSet.add(new ArrayList<Integer>(result));
+        } else {
+            for(int i = startIndex; i < candidates.length && target >= candidates[i]; i ++) {
+                target -= candidates[i];
+                result.add(candidates[i]);
+                combinationSumHelper(candidates, i, target, result, resultSet);
+                result.remove(result.size() - 1);
+                target += candidates[i];
+            }
+        }
+    }
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> resultSet = new ArrayList<List<Integer>>();
         List<Integer> result = new ArrayList<Integer>();
@@ -37,8 +37,8 @@ class Solution039 {
     }
 
     public static void main(String[] args) {
-    	Solution039 test = new Solution039();
-    	int[] candidates = {8,7,4,3};
-    	System.out.println(test.combinationSum(candidates, 11));
+        Solution039 test = new Solution039();
+        int[] candidates = {8,7,4,3};
+        System.out.println(test.combinationSum(candidates, 11));
     }
 }

@@ -37,9 +37,9 @@ class Solution003 {
         return maxLength;
     }
 
-	public static void main(String[] args) {
-		Solution003 test = new Solution003();
-		System.out.println(test.lengthOfLongestSubstring("abcabcbbd"));
-		System.out.println(test.lengthOfLongestSubstring("bbbb"));
-	}
+    public static void main(String[] args) {
+        Solution003 test = new Solution003();
+        System.out.println(test.lengthOfLongestSubstring("abcabcbbd"));
+        System.out.println(test.lengthOfLongestSubstring("bbbb"));
+    }
 }
