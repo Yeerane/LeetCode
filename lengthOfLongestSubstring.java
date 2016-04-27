@@ -1,45 +1,37 @@
-class Solution003 {
-    public static final int NUM_OF_CHARS = 10000;
-    public int lengthOfLongestSubstring(String s) {
-        if(s == null || s.length() == 0){
-            return 0;
-        }
-        int[] indexOfChars = new int[NUM_OF_CHARS];
-        int start = 0;
-        int curIndex = 0;
-        int maxLength = -1;
-        int curLength = 0;
-        String longestSub = "";
-        String curString = "";
-        for(int i = 0; i < NUM_OF_CHARS; i++) {
-            indexOfChars[i] = -1;
-        }
-        while(curIndex < s.length()) {
-            if(s == null || s.length() == 0){
-            return 0;
-        }
-            if(indexOfChars[s.charAt(curIndex)] < start) {
-                indexOfChars[s.charAt(curIndex)] = curIndex;
-                curLength ++;
-                curString += s.substring(curIndex, curIndex + 1);
-                maxLength = maxLength > curLength ? maxLength : curLength;
-                longestSub = maxLength > curLength ? longestSub : curString;
+/*Longest Increasing Subsequence*/
 
-            } else {
-                start = indexOfChars[s.charAt(curIndex)] + 1;
-                indexOfChars[s.charAt(curIndex)] = curIndex;
-                curString = curIndex == s.length() - 1 ? s.substring(start) : s.substring(start, curIndex + 1);
-                curLength = curString.length();
-            }
-            curIndex ++;
+
+class Solution300 {
+    public int lengthOfLIS(int[] nums) {
+        int[] lis = new int[nums.length];            // lis[i] stores the length of longest substring from 0 to i;
+        for(int i = 0; i < nums.length; i ++) {
+            lis[i] = 1;
         }
-        System.out.println("the longest substring of " + "\"" + s + "\"" + " is " + "\"" + longestSub + "\"" + ", length is " + maxLength);
-        return maxLength;
+        // lis[0] = 1;
+        for (int i = 1; i < nums.length; i ++) {
+            int max = 1;
+            for (int j = 0; j < i; j ++) {
+                if(nums[j] < nums[i]) {
+                    // System.out.println("updating lis" + "[" + i + "] " + "according to " + j);
+                    max = Math.max(max, lis[j]);
+
+                    // max = a[j];
+                    lis[i] = max + 1;
+                }
+            }
+            // System.out.println("lengthOfLIS till " + i + ": " + lis[i]);
+        }
+
+        int lisLength = 0;
+        for (int i = 0; i < nums.length; i ++) {
+            lisLength = Math.max(lisLength, lis[i]);
+        }
+        return lisLength;
     }
 
     public static void main(String[] args) {
-        Solution003 test = new Solution003();
-        System.out.println(test.lengthOfLongestSubstring("abcabcbbd"));
-        System.out.println(test.lengthOfLongestSubstring("bbbb"));
+        Solution300 test = new Solution300();
+        int[] nums = {10, 9, 2, 5, 3, 7, 101, 18};
+        System.out.println(test.lengthOfLIS(nums));
     }
 }
